@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
 import apiRoutes from './routes/api.js';
+import connection from './config/connectDB.js';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -26,6 +27,8 @@ app.get('/', (req, res) => {
 });
 
 apiRoutes(app);
+
+connection();
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
