@@ -34,6 +34,24 @@ export const handleLogin = async (req, res) => {
   }
 };
 
+// Đăng xuất
+export const logout = async (req, res) => {
+  try {
+    const { refreshToken } = req.body;
+    if (!refreshToken) {
+      return res.status(400).json({ error: 'Refresh token is required' });
+    }
+
+    const result = await userService.logoutUser(refreshToken);
+    if (result.errCode === 0) {
+      res.status(200).json({ message: result.errMessage });
+    } else {
+      res.status(400).json({ error: result.errMessage });
+    }
+  } catch (error) {
+    res.status(500).json({ error: `Server error: ${error.message}` });
+  }
+};
 
 export const refreshToken = async (req, res) => {
   try {
@@ -59,9 +77,9 @@ export const refreshToken = async (req, res) => {
 };
 
 
-export const handleEditUser = async (req, res) => {
+export const handleUpdateUser = async (req, res) => {
   try {
-    const result = await userService.editUser(req.params.id, req.body);
+    const result = await userService.updateUser(req.body);
     return res.status(200).json(result);
   } catch (e) {
     return res.status(500).json({
@@ -74,7 +92,7 @@ export const handleEditUser = async (req, res) => {
 // Xóa người dùng
 export const handleDeleteUser = async (req, res) => {
   try {
-    const result = await userService.deleteUser(req.params.id);
+    const result = await userService.deleteUser(req.query.id);
     return res.status(200).json(result);
   } catch (e) {
     return res.status(500).json({

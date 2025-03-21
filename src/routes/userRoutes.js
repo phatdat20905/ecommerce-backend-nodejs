@@ -9,10 +9,11 @@ router.post('/login', userController.handleLogin);
 router.post('/refresh-token', userController.refreshToken);
 
 // Cần xác thực
+router.post('/logout', authenticateToken, userController.logout);
 router.get('/get-user-by-id', userController.getUserById);
 router.get('/all', userController.getAllUsers);
-router.put("/edit-user/:id", userController.handleEditUser);
-router.delete("/delete-user/:id", userController.handleDeleteUser);
+router.put("/update-user", userController.handleUpdateUser);
+router.delete("/delete-user", userController.handleDeleteUser);
 // router.delete('/:id', authenticateToken, authorizeRole(['admin']), userController.deleteUser);
 // router.get('/all', authenticateToken, authorizeRole(['admin']), userController.getAllUsers); 
 export default router;

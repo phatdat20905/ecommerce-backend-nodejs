@@ -103,7 +103,32 @@ const hashUserPassword = async (password) => {
         errMessage: `Error logging in: ${error.message}`
       };
     }
-  };
+};
+
+// Hàm đăng xuất
+export const logoutUser = async (refreshToken) => {
+  try {
+    const storedToken = await db.RefreshToken.findOne({ where: { token: refreshToken } });
+    if (!storedToken) {
+      return {
+        errCode: 1,
+        errMessage: 'Refresh token not found'
+      };
+    }
+
+    await storedToken.destroy();
+    return {
+      errCode: 0,
+      errMessage: 'Logout successful'
+    };
+  } catch (error) {
+    return {
+      errCode: -1,
+      errMessage: `Error logging out: ${error.message}`
+    };
+  }
+};
+  
   
 // Hàm làm mới access token
 export const refreshAccessToken = async (refreshToken) => {
@@ -161,16 +186,17 @@ export const refreshAccessToken = async (refreshToken) => {
 
 
 // Hàm chỉnh sửa thông tin người dùng
-export const editUser = async (id, userData) => {
+export const updateUser = async (data) => {
   try {
-    if (!id || isNaN(id)) {
+    const { user_id, ...userData } = data; // Lấy user_id từ data
+    if (!user_id || isNaN(user_id)) {
       return {
         errCode: 1,
         errMessage: 'Invalid user ID'
       };
     }
 
-    const user = await db.User.findByPk(id);
+    const user = await db.User.findByPk(user_id);
     if (!user) {
       return {
         errCode: 2,
@@ -184,12 +210,13 @@ export const editUser = async (id, userData) => {
     }
 
     // Cập nhật thông tin
-    await user.update(userData);
+    await db.User.update(userData, { where: { user_id } }); // Dùng db.User.update thay vì user.update
+    const updatedUser = await db.User.findByPk(user_id); // Lấy lại user sau khi cập nhật
 
     return {
       errCode: 0,
       errMessage: 'User updated successfully',
-      data: user
+      data: updatedUser
     };
   } catch (error) {
     return {
