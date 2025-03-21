@@ -38,10 +38,13 @@ module.exports = {
         // references: { model: 'discounts', key: 'discount_id' },
         onDelete: 'SET NULL'
       },
-      created_at: {
+      createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
       }
     });
   },

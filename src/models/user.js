@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Cart, { foreignKey: 'user_id' });
       User.hasMany(models.Order, { foreignKey: 'user_id' });
       User.hasMany(models.Review, { foreignKey: 'user_id' });
+      User.hasMany(models.RefreshToken, { foreignKey: 'user_id' });
     }
   }
   User.init({
@@ -34,13 +35,9 @@ module.exports = (sequelize, DataTypes) => {
     phone: DataTypes.STRING(15),
     address: DataTypes.TEXT,
     image_url: DataTypes.STRING(255),
-    created_at: DataTypes.DATE,
-    updated_at: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'User',
-    tableName: 'users',
-    timestamps: false
   });
   return User;
 };

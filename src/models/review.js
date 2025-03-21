@@ -27,12 +27,9 @@ module.exports = (sequelize, DataTypes) => {
       validate: { min: 1, max: 5 }
     },
     comment: DataTypes.TEXT,
-    created_at: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Review',
-    tableName: 'reviews',
-    timestamps: false
   });
   return Review;
 };

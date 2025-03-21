@@ -20,15 +20,13 @@ module.exports = {
       logo_url: {
         type: Sequelize.STRING(255)
       },
-      created_at: {
+      createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW
+        type: Sequelize.DATE
       },
-      updated_at: {
+      updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW
+        type: Sequelize.DATE
       }
     });
   },

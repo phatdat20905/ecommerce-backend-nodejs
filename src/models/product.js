@@ -31,13 +31,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     stock: DataTypes.INTEGER,
     image_url: DataTypes.STRING(255),
-    created_at: DataTypes.DATE,
-    updated_at: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Product',
-    tableName: 'products',
-    timestamps: false
   });
   return Product;
 };

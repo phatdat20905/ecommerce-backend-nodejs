@@ -40,15 +40,13 @@ module.exports = {
         type: Sequelize.DataTypes.STRING(255), // Thêm DataTypes
         allowNull: true
       },
-      created_at: {
+      createdAt: {
         allowNull: false,
-        type: Sequelize.DataTypes.DATE, // Thêm DataTypes
-        defaultValue: Sequelize.DataTypes.NOW // Thêm DataTypes
+        type: Sequelize.DATE
       },
-      updated_at: {
+      updatedAt: {
         allowNull: false,
-        type: Sequelize.DataTypes.DATE, // Thêm DataTypes
-        defaultValue: Sequelize.DataTypes.NOW // Thêm DataTypes
+        type: Sequelize.DATE
       }
     });
   },

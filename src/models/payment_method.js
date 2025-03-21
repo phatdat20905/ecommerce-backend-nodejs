@@ -19,9 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.TEXT
   }, {
     sequelize,
-    modelName: 'PaymentMethod',
-    tableName: 'payment_methods',
-    timestamps: false
+    modelName: 'PaymentMethod'
   });
   return PaymentMethod;
 };

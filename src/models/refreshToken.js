@@ -1,14 +1,13 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Cart extends Model {
+  class RefreshToken extends Model {
     static associate(models) {
-      Cart.belongsTo(models.User, { foreignKey: 'user_id' });
-      Cart.belongsTo(models.Product, { foreignKey: 'product_id' });
+      RefreshToken.belongsTo(models.User, { foreignKey: 'user_id' });
     }
   }
-  Cart.init({
-    cart_id: {
+  RefreshToken.init({
+    id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
@@ -17,18 +16,19 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    product_id: {
-      type: DataTypes.INTEGER,
+    token: {
+      type: DataTypes.STRING(255),
       allowNull: false
     },
-    quantity: {
-      type: DataTypes.INTEGER,
+    expires_at: {
+      type: DataTypes.DATE,
       allowNull: false
     },
-    added_at: DataTypes.DATE
   }, {
     sequelize,
-    modelName: 'Cart',
+    modelName: 'RefreshToken',
+    tableName:'refresh_tokens',
+    timestamps: false,
   });
-  return Cart;
+  return RefreshToken;
 };

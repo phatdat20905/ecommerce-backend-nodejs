@@ -20,6 +20,14 @@ module.exports = {
         allowNull: false,
         // references: { model: 'roles', key: 'role_id' },
         onDelete: 'CASCADE'
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
       }
     });
   },

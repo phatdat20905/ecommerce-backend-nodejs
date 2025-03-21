@@ -30,12 +30,9 @@ module.exports = (sequelize, DataTypes) => {
     shipping_address: DataTypes.TEXT,
     payment_method_id: DataTypes.INTEGER,
     discount_id: DataTypes.INTEGER,
-    created_at: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Order',
-    tableName: 'orders',
-    timestamps: false
   });
   return Order;
 };

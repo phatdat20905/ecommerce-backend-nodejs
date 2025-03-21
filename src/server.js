@@ -1,11 +1,11 @@
 import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
-import apiRoutes from './routes/api.js';
+import apiRoutes from './routes/index.js';
 import connection from './config/connectDB.js';
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8082;
 
 // Cấu hình CORS chi tiết
 const corsOptions = {
@@ -26,7 +26,8 @@ app.get('/', (req, res) => {
   res.send('Welcome to E-commerce Backend!');
 });
 
-apiRoutes(app);
+// Routes
+app.use('/api', apiRoutes);
 
 connection();
 
